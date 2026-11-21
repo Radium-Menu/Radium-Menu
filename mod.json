@@ -4,7 +4,7 @@
         "win": "*",
         "mac": "*",
         "ios": "*",
-        "android64": "*"
+        "android": "*"
     },
     "id": "t1fy.radium",
     "name": "Radium",
