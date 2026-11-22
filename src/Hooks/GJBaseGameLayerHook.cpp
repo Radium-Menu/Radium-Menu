@@ -1,7 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/GJBaseGameLayer.hpp>
 
-#include "../Radium/TpsBypass.hpp"
+#include "Physics/TpsBypass.hpp"
 
 using namespace geode::prelude;
 

@@ -10,10 +10,11 @@ using namespace geode::prelude;
 
 namespace Radium::FloatingButton {
 
-    void install() {
-        static bool s_installed = false;
-        if (s_installed) return;
-        s_installed = true;
+    void attach(CCScene* scene) {
+        if (!scene) return;
+
+        auto id = "radium-button"_spr;
+        if (scene->getChildByID(id)) return;
 
         auto winSize = CCDirector::get()->getWinSize();
 
@@ -25,12 +26,11 @@ namespace Radium::FloatingButton {
         });
 
         auto menu = CCMenu::create();
-        menu->setID("radium-button"_spr);
+        menu->setID(id);
         menu->setPosition(ccp(36.f, winSize.height * 0.62f));
-        menu->setZOrder(10000);
         menu->addChild(button);
 
-        SceneManager::get()->keepAcrossScenes(menu);
+        scene->addChild(menu, 10000);
     }
 
 }
@@ -39,7 +39,7 @@ namespace Radium::FloatingButton {
 
 namespace Radium::FloatingButton {
 
-    void install() {}
+    void attach(cocos2d::CCScene*) {}
 
 }
 

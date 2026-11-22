@@ -1,7 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/CCScheduler.hpp>
 
-#include "../Radium/Speedhack.hpp"
+#include "Assist/Speedhack.hpp"
 
 using namespace geode::prelude;
 

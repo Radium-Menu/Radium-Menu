@@ -2,7 +2,7 @@
 #include <Geode/modify/GameManager.hpp>
 #include <Geode/modify/GameStatsManager.hpp>
 
-#include "../Radium/UnlockIcons.hpp"
+#include "Utility/UnlockIcons.hpp"
 
 using namespace geode::prelude;
 

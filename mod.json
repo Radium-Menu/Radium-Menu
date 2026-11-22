@@ -10,19 +10,12 @@
     "name": "Radium",
     "version": "v0.1.0",
     "developer": "T1fy",
-    "description": "A Geometry Dash mod menu.",
+    "description": "A Geometry Dash mod menu with a built-in replay tool.",
     "repository": "https://github.com/T1fyOwO/Radium-Menu",
     "tags": ["utility", "interface"],
     "resources": {
         "files": [
             "resources/OpenSans-Regular.ttf"
         ]
-    },
-    "dependencies": [
-        {
-            "id": "t1fy.vbot",
-            "version": ">=v1.0.0-alpha.1",
-            "importance": "suggested"
-        }
-    ]
+    }
 }

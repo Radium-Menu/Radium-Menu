@@ -1,10 +1,11 @@
 #include "Ui.hpp"
 #include "MainLevelBypass.hpp"
 #include "Noclip.hpp"
-#include "Speedhack.hpp"
-#include "TpsBypass.hpp"
 #include "UnlockIcons.hpp"
-#include "Vbot.hpp"
+
+#include "Assist/Speedhack.hpp"
+#include "Physics/TpsBypass.hpp"
+#include "RadiumReplay/RadiumReplay.hpp"
 
 #include <Geode/Geode.hpp>
 #include <Geode/binding/PlatformToolbox.hpp>
@@ -12,6 +13,7 @@
 #include <imgui.h>
 
 #include <algorithm>
+#include <filesystem>
 #include <vector>
 
 using namespace geode::prelude;
@@ -38,10 +40,13 @@ namespace Radium::Ui {
     static constexpr float kScale = 1.f;
 #endif
 
+    static std::string toUtf8(std::filesystem::path const& path) {
+        auto text = path.u8string();
+        return std::string(text.begin(), text.end());
+    }
+
     static void loadFont() {
-        auto path = geode::utils::string::pathToString(
-            Mod::get()->getResourcesDir() / "OpenSans-Regular.ttf"
-        );
+        auto path = toUtf8(Mod::get()->getResourcesDir() / "OpenSans-Regular.ttf");
 
         ImGuiIO& io = ImGui::GetIO();
         ImFont* font = io.Fonts->AddFontFromFileTTF(path.c_str(), kFontSize);
@@ -133,7 +138,7 @@ namespace Radium::Ui {
             ImGui::Spacing();
             MainLevelBypass::renderUi();
         });
-        addTab("Vbot", [] { Vbot::renderUi(); });
+        addTab("Replay", [] { RadiumReplay::renderUi(); });
 
         ImGuiCocos::get()
             .setup([] {
@@ -165,7 +170,7 @@ namespace Radium::Ui {
         }
 
         auto scene = CCDirector::get()->getRunningScene();
-        bool paused = scene && getChildOfType<PauseLayer>(scene, 0) != nullptr;
+        bool paused = scene && scene->getChildByType<PauseLayer>(0) != nullptr;
         if (PlayLayer::get() && !paused) {
             PlatformToolbox::hideCursor();
         }

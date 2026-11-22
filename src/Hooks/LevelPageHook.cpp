@@ -1,7 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/LevelPage.hpp>
 
-#include "../Radium/MainLevelBypass.hpp"
+#include "Utility/MainLevelBypass.hpp"
 
 using namespace geode::prelude;
 

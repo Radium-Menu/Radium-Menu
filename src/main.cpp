@@ -1,11 +1,11 @@
 #include <Geode/Geode.hpp>
 
-#include "Radium/MainLevelBypass.hpp"
-#include "Radium/Noclip.hpp"
-#include "Radium/Speedhack.hpp"
-#include "Radium/TpsBypass.hpp"
-#include "Radium/Ui.hpp"
-#include "Radium/UnlockIcons.hpp"
+#include "Assist/Speedhack.hpp"
+#include "Physics/TpsBypass.hpp"
+#include "Utility/MainLevelBypass.hpp"
+#include "Utility/Noclip.hpp"
+#include "Utility/Ui.hpp"
+#include "Utility/UnlockIcons.hpp"
 
 using namespace geode::prelude;
 

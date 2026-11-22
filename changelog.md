@@ -2,6 +2,6 @@
 
 - Initial release
 - TPS bypass, speedhack, noclip, unlock all icons and colors, main level bypass
-- Vbot tab for macro recording, macro replay and the renderer
+- Radium Replay: record and play back inputs, saved as `.radium1` (format v1)
 - ImGui menu using Open Sans Regular
 - Windows, macOS, iOS and Android 64-bit
