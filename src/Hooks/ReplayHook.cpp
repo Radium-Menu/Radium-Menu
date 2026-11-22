@@ -7,9 +7,9 @@
 using namespace geode::prelude;
 
 class $modify(RadiumReplayGameLayer, GJBaseGameLayer) {
-    void processCommands(float dt) {
+    void processCommands(float dt, bool isHalfTick, bool isLastTick) {
         Radium::RadiumReplay::beginStep(this);
-        GJBaseGameLayer::processCommands(dt);
+        GJBaseGameLayer::processCommands(dt, isHalfTick, isLastTick);
         Radium::RadiumReplay::endStep(this);
     }
 
