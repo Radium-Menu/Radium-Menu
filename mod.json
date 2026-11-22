@@ -3,7 +3,6 @@
     "gd": {
         "win": "*",
         "mac": "*",
-        "ios": "*",
         "android": "*"
     },
     "id": "t1fy.radium",
