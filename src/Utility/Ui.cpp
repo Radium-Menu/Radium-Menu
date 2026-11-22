@@ -1,6 +1,7 @@
 #include "Ui.hpp"
 #include "MainLevelBypass.hpp"
 #include "Noclip.hpp"
+#include "Paths.hpp"
 #include "UnlockIcons.hpp"
 
 #include "Assist/Speedhack.hpp"
@@ -46,7 +47,7 @@ namespace Radium::Ui {
     }
 
     static void loadFont() {
-        auto path = toUtf8(Mod::get()->getResourcesDir() / "OpenSans-Regular.ttf");
+        auto path = toUtf8(Paths::toStd(Mod::get()->getResourcesDir()) / "OpenSans-Regular.ttf");
 
         ImGuiIO& io = ImGui::GetIO();
         ImFont* font = io.Fonts->AddFontFromFileTTF(path.c_str(), kFontSize);
