@@ -11,6 +11,7 @@
 #include <iterator>
 
 #include "Physics/TpsBypass.hpp"
+#include "Utility/Paths.hpp"
 
 using namespace geode::prelude;
 
@@ -28,7 +29,7 @@ namespace Radium::RadiumReplay {
         bool s_filesLoaded = false;
 
         std::filesystem::path replayDirectory() {
-            return Mod::get()->getSaveDir() / "replays";
+            return Paths::toStd(Mod::get()->getSaveDir()) / "replays";
         }
 
         std::filesystem::path replayPath(std::string const& name) {
