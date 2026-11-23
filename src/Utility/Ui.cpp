@@ -99,6 +99,10 @@ namespace Radium::Ui {
     }
 
     static void render() {
+#ifdef GEODE_IS_ANDROID
+        geode::cocos::setMousePos(ccp(0.f, 0.f));
+#endif
+
         ImVec2 display = ImGui::GetIO().DisplaySize;
         ImVec2 size(
             std::min(560.f * kScale, display.x * 0.92f),
