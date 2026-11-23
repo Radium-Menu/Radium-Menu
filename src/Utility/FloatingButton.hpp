@@ -1,11 +1,11 @@
 #pragma once
 
 namespace cocos2d {
-    class CCScene;
+    class CCNode;
 }
 
 namespace Radium::FloatingButton {
 
-    void attach(cocos2d::CCScene* scene);
+    void attach(cocos2d::CCNode* parent);
 
 }
