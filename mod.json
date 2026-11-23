@@ -13,6 +13,9 @@
     "repository": "https://github.com/T1fyOwO/Radium-Menu",
     "tags": ["utility", "interface"],
     "resources": {
+        "sprites": [
+            "resources/radium-button.png"
+        ],
         "files": [
             "resources/OpenSans-Regular.ttf"
         ]
