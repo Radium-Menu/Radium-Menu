@@ -35,11 +35,11 @@ add_subdirectory(
     ${CMAKE_CURRENT_BINARY_DIR}/geode
 )
 
+set(IMGUI_ILL_HANDLE_TOUCHES ON CACHE BOOL "" FORCE)
+
 CPMAddPackage(
     "gh:matcool/gd-imgui-cocos#934958c68b1f050a8976d893584fa71368c1df1f"
 )
-
-target_compile_definitions(imgui-cocos PRIVATE IMGUI_ILL_HANDLE_TOUCHES)
 
 target_link_libraries(${PROJECT_NAME}
     imgui-cocos
