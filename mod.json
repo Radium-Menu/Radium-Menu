@@ -5,10 +5,10 @@
         "mac": "*",
         "android": "*"
     },
-    "id": "t1fy.radium",
+    "id": "radium-team.radium",
     "name": "Radium",
     "version": "v0.1.0",
-    "developer": "T1fy",
+    "developer": "Radium Team",
     "description": "A Geometry Dash mod menu with a built-in replay tool.",
     "repository": "https://github.com/T1fyOwO/Radium-Menu",
     "tags": ["utility", "interface"],
