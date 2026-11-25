@@ -42,7 +42,7 @@ src/
   Utility/       the menu and everything unrelated to making macros
 ```
 
-## Building
+## Building Locally
 
 Set the `GEODE_SDK` environment variable, then:
 
