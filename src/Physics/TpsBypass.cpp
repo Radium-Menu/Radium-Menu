@@ -9,12 +9,20 @@ namespace Radium::TpsBypass {
 
     static bool s_enabled = false;
     static float s_tps = kVanillaTps;
+    static bool s_realTime = false;
 
     bool isEnabled() { return s_enabled; }
 
     void setEnabled(bool enabled) {
         s_enabled = enabled;
         Mod::get()->setSavedValue("radium.tps.enabled", enabled);
+    }
+
+    bool isRealTime() { return s_realTime; }
+
+    void setRealTime(bool realTime) {
+        s_realTime = realTime;
+        Mod::get()->setSavedValue("radium.tps.realtime", realTime);
     }
 
     float getTps() { return s_tps; }
@@ -25,6 +33,7 @@ namespace Radium::TpsBypass {
     }
 
     void load() {
+        s_realTime = Mod::get()->getSavedValue<bool>("radium.tps.realtime", false);
         s_enabled = Mod::get()->getSavedValue<bool>("radium.tps.enabled", false);
         s_tps = std::clamp(
             Mod::get()->getSavedValue<float>("radium.tps.value", kVanillaTps), kMinTps, kMaxTps
@@ -63,6 +72,18 @@ namespace Radium::TpsBypass {
             }
             ImGui::PopID();
         }
+
+        bool realTime = s_realTime;
+        if (ImGui::Checkbox("Real Time##tps-realtime", &realTime)) {
+            setRealTime(realTime);
+        }
+
+        ImGui::PushTextWrapPos(0.f);
+        ImGui::TextDisabled(
+            "On: the game keeps its normal speed and lowers the TPS if your device cannot keep up. "
+            "Off: every tick is computed and the game slows down instead. Replays always use Off."
+        );
+        ImGui::PopTextWrapPos();
 
         ImGui::EndDisabled();
     }
