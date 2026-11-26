@@ -6,19 +6,37 @@
 using namespace geode::prelude;
 
 class $modify(RadiumTpsGameLayer, GJBaseGameLayer) {
-    float getModifiedDelta(float dt) {
-        if (!Radium::TpsBypass::isEnabled()) {
-            return GJBaseGameLayer::getModifiedDelta(dt);
+    struct Fields {
+        double overflow = 0.0;
+        double tick = 0.0;
+    };
+
+    double getModifiedDelta(float dt) {
+        if (m_fields->tick > 0.0) {
+            return m_fields->tick;
+        }
+        return GJBaseGameLayer::getModifiedDelta(dt);
+    }
+
+    void update(float dt) {
+        if (!Radium::TpsBypass::isEnabled() || !typeinfo_cast<PlayLayer*>(this)) {
+            m_fields->overflow = 0.0;
+            GJBaseGameLayer::update(dt);
+            return;
         }
 
-        auto result = Radium::TpsBypass::computeStep(
-            dt,
-            m_extraDelta,
-            m_gameState.m_timeWarp,
-            Radium::TpsBypass::getTps()
+        double tick = Radium::TpsBypass::tickLength(
+            Radium::TpsBypass::getTps(),
+            m_gameState.m_timeWarp
         );
 
-        m_extraDelta = static_cast<float>(result.extra);
-        return static_cast<float>(result.delta);
+        auto plan = Radium::TpsBypass::planTicks(dt, m_fields->overflow, tick);
+        m_fields->overflow = plan.overflow;
+
+        m_fields->tick = tick;
+        for (int i = 0; i < plan.count; ++i) {
+            GJBaseGameLayer::update(static_cast<float>(tick));
+        }
+        m_fields->tick = 0.0;
     }
 };
