@@ -6,30 +6,29 @@
 namespace Radium::TpsBypass {
 
     inline constexpr float kVanillaTps = 240.f;
-    inline constexpr float kMinTps = 60.f;
+    inline constexpr float kMinTps = 240.f;
     inline constexpr float kMaxTps = 10000.f;
-    inline constexpr int kMaxStepsPerFrame = 5000;
+    inline constexpr int kMaxTicksPerFrame = 600;
 
-    struct StepResult {
-        double delta;
-        double extra;
-        int steps;
+    struct TickPlan {
+        int count;
+        double overflow;
     };
 
-    inline StepResult computeStep(float dt, double extra, float timeWarp, float tps) {
-        tps = std::clamp(tps, kMinTps, kMaxTps);
-        float warp = timeWarp > 0.f ? std::min(timeWarp, 1.f) : 1.f;
-        double timestep = static_cast<double>(warp) / tps;
+    inline double tickLength(float tps, float timeWarp) {
+        double warp = timeWarp > 0.f ? std::min(timeWarp, 1.f) : 1.f;
+        return warp / std::clamp(tps, kMinTps, kMaxTps);
+    }
 
-        double total = static_cast<double>(std::max(dt, 0.f)) + extra;
-        int steps = static_cast<int>(std::floor(total / timestep));
+    inline TickPlan planTicks(double dt, double overflow, double tick) {
+        double total = std::max(dt, 0.0) + overflow;
+        int count = static_cast<int>(std::floor(total / tick));
 
-        if (steps > kMaxStepsPerFrame) {
-            return { kMaxStepsPerFrame * timestep, 0.0, kMaxStepsPerFrame };
+        if (count > kMaxTicksPerFrame) {
+            return { kMaxTicksPerFrame, 0.0 };
         }
 
-        double delta = steps * timestep;
-        return { delta, total - delta, steps };
+        return { count, total - count * tick };
     }
 
     bool isEnabled();
