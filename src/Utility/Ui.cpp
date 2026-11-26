@@ -15,6 +15,7 @@
 
 #include <algorithm>
 #include <filesystem>
+#include <utility>
 #include <vector>
 
 using namespace geode::prelude;
@@ -99,10 +100,6 @@ namespace Radium::Ui {
     }
 
     static void render() {
-#ifdef GEODE_IS_ANDROID
-        geode::cocos::setMousePos(ccp(0.f, 0.f));
-#endif
-
         ImVec2 display = ImGui::GetIO().DisplaySize;
         ImVec2 size(
             std::min(560.f * kScale, display.x * 0.92f),
@@ -111,8 +108,7 @@ namespace Radium::Ui {
         ImGui::SetNextWindowPos(ImVec2(display.x * 0.04f, display.y * 0.05f), ImGuiCond_FirstUseEver);
         ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
 
-        bool open = true;
-        if (ImGui::Begin("Radium", &open, ImGuiWindowFlags_NoCollapse)) {
+        if (ImGui::Begin("Radium", nullptr, ImGuiWindowFlags_NoCollapse)) {
             if (ImGui::BeginTabBar("radium-tabs")) {
                 for (auto& tab : tabs()) {
                     if (ImGui::BeginTabItem(tab.name.c_str())) {
@@ -124,10 +120,6 @@ namespace Radium::Ui {
             }
         }
         ImGui::End();
-
-        if (!open) {
-            Loader::get()->queueInMainThread([] { toggle(); });
-        }
     }
 
     void addTab(std::string name, std::function<void()> draw) {
@@ -156,10 +148,6 @@ namespace Radium::Ui {
                 applyStyle();
             })
             .draw([] { render(); });
-
-#ifdef GEODE_IS_MOBILE
-        ImGuiCocos::get().setInputMode(ImGuiCocos::InputMode::Blocking);
-#endif
 
         s_ready = true;
     }
