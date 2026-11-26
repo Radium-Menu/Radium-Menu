@@ -55,7 +55,7 @@ namespace Radium::TpsBypass {
         }
 
         ImGui::TextUnformatted("Presets");
-        for (float preset : { 60.f, 240.f, 1000.f, 4000.f, 10000.f }) {
+        for (float preset : { 240.f, 480.f, 1000.f, 4000.f, 10000.f }) {
             ImGui::SameLine();
             ImGui::PushID(static_cast<int>(preset));
             if (ImGui::Button(fmt::format("{}", static_cast<int>(preset)).c_str())) {
